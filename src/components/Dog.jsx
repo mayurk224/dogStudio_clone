@@ -24,14 +24,13 @@ const Dog = () => {
     actions["Take 001"].play();
   }, [actions]);
 
-  const [normalMap ] = useTexture([
-    "/dog_normals.jpg",
-    "/matcap/mat-2.png",
-  ]).map((texture) => {
-    texture.flipY = false;
-    texture.colorSpace = THREE.SRGBColorSpace;
-    return texture;
-  });
+  const [normalMap] = useTexture(["/dog_normals.jpg", "/matcap/mat-2.png"]).map(
+    (texture) => {
+      texture.flipY = false;
+      texture.colorSpace = THREE.SRGBColorSpace;
+      return texture;
+    }
+  );
 
   const [branchMap, branchNormalMap] = useTexture([
     "/branches_diffuse.jpeg",
@@ -89,16 +88,16 @@ const Dog = () => {
   });
 
   const material = useRef({
-    uMatcap1:{
-      value:mat2,
+    uMatcap1: {
+      value: mat19,
     },
-    uMatcap2:{
-      value:mat20,
+    uMatcap2: {
+      value: mat2,
     },
     uProgress: {
-      value: 0.5,
+      value: 1.0,
     },
-  })
+  });
 
   const dogMaterial = new THREE.MeshMatcapMaterial({
     normalMap: normalMap,
@@ -178,6 +177,57 @@ const Dog = () => {
         "third"
       );
   }, []);
+
+  useEffect(() => {
+    const map = {
+      tomorrowland: mat19,
+      "navy-pier": mat8,
+      "msi-chicago": mat9,
+      phone: mat12,
+      kikk: mat10,
+      kennedy: mat8,
+      opera: mat13,
+    };
+
+    const animateMatcap = (next) => {
+      gsap.to(material.current.uProgress, {
+        value: 0,
+        duration: 0.3,
+        onComplete: () => {
+          material.current.uMatcap2.value = next;
+          material.current.uProgress.value = 1;
+        },
+      });
+    };
+
+    const onMouseEnter = (e) => {
+      const next = map[e.target.getAttribute("img-title")];
+      if (!next) return;
+      material.current.uMatcap1.value = next;
+      animateMatcap(next);
+    };
+
+    const onMouseLeave = () => {
+      material.current.uMatcap1.value = mat2;
+      animateMatcap(mat2);
+    };
+
+    document
+      .querySelectorAll(".title[img-title]")
+      .forEach((el) => el.addEventListener("mouseenter", onMouseEnter));
+    document
+      .querySelector(".titles")
+      ?.addEventListener("mouseleave", onMouseLeave);
+
+    return () => {
+      document
+        .querySelectorAll(".title[img-title]")
+        .forEach((el) => el.removeEventListener("mouseenter", onMouseEnter));
+      document
+        .querySelector(".titles")
+        ?.removeEventListener("mouseleave", onMouseLeave);
+    };
+  }, [mat2, mat8, mat9, mat10, mat12, mat13, mat19]);
 
   return (
     <>
