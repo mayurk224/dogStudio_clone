@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import {
@@ -7,8 +7,14 @@ import {
   useGLTF,
   useTexture,
 } from "@react-three/drei";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Dog = () => {
+  gsap.registerPlugin(useGSAP());
+  gsap.registerPlugin(ScrollTrigger);
+
   const model = useGLTF("/models/dog.drc.glb");
 
   useThree(({ camera, scene, gl }) => {
@@ -57,6 +63,34 @@ const Dog = () => {
       child.material = branchMaterial;
     }
   });
+
+  const dogModel = useRef(model);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#section-1",
+        endTrigger: "#section-3",
+        start: "top top",
+        end: "bottom bottom",
+        markers: true,
+        scrub: true,
+      },
+    });
+    tl.to(dogModel.current.scene.position, {
+      z: "-=0.5",
+      y: "+=0.1",
+    })
+      .to(dogModel.current.scene.rotation, {
+        x: `+=${Math.PI / 13}`,
+      })
+      .to(dogModel.current.scene.rotation, { y: `-=${Math.PI}` }, "third")
+      .to(
+        dogModel.current.scene.position,
+        { x: "-=0.4", z: "+=0.4", y: "-=0.1" },
+        "third"
+      );
+  }, []);
 
   return (
     <>

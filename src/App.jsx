@@ -5,9 +5,25 @@ import { Canvas } from "@react-three/fiber";
 const App = () => {
   return (
     <>
-      <Canvas>
-        <Dog />
-      </Canvas>
+      <main>
+        <Canvas style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex:1,
+          backgroundImage: "url('/background-l.png')",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}>
+          <Dog />
+        </Canvas>
+        <section id="section-1"></section>
+        <section id="section-2"></section>
+        <section id="section-3"></section>
+      </main>
     </>
   );
 };
