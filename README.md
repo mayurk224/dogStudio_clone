@@ -1,16 +1,118 @@
-# React + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🐶 Dogstudio Landing – 3D React Clone
 
-Currently, two official plugins are available:
+A small but punchy clone-inspired landing experience of Dogstudio, built with  
+React, Vite, Three.js, React Three Fiber, GSAP, and custom matcap shaders.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+</div>
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 3D dog model rendered with Three.js + React Three Fiber
+- Custom matcap shader transition on the dog and branches
+- Scroll-driven camera and model animation powered by GSAP ScrollTrigger
+- Hover-driven color / matcap transitions mapped to project titles
+- Modern Vite-based React setup with fast HMR
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Tech Stack
+
+- **Framework**: React + Vite
+- **3D / WebGL**: Three.js, @react-three/fiber, @react-three/drei
+- **Animation**: GSAP, @gsap/react, ScrollTrigger
+- **Language**: JavaScript (ESM)
+
+---
+
+## 📦 Getting Started
+
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/dogstudio-clone.git
+cd dogstudio-clone
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+Then open the printed local URL (usually `http://localhost:5173`) in your browser.
+
+### Production Build
+
+```bash
+npm run build
+```
+
+To preview the production build:
+
+```bash
+npm run preview
+```
+
+---
+
+## 🧠 Project Structure
+
+Key files and folders:
+
+- `src/main.jsx` – React entry point
+- `src/App.jsx` – Main layout / sections
+- `src/components/Dog.jsx` – 3D dog + branches scene, shaders, and animations
+- `public/models/dog.drc.glb` – Compressed dog model
+- `public/matcap/*.png` – Matcap textures used by the custom shader
+- `public/*` – Normal maps and project thumbnails
+
+---
+
+## 🎨 3D & Shader Highlights
+
+- Uses `useGLTF` to load the dog model and `useAnimations` to play its idle animation.
+- Applies a **custom matcap blending shader** via `onBeforeCompile`, injecting uniforms:
+  - `uMatcapTexture1`, `uMatcapTexture2` – two matcaps to blend between
+  - `uProgress` – controls the smooth transition between matcaps
+- ScrollTrigger-driven GSAP timeline moves/rotates the scene as you scroll between sections.
+- Hovering the project titles updates the matcap uniforms, creating interactive visual feedback.
+
+---
+
+## 🛠️ Scripts
+
+From `package.json`:
+
+- `npm run dev` – Start dev server
+- `npm run build` – Build for production
+- `npm run preview` – Preview production build
+- `npm run lint` – Run ESLint over the project
+
+---
+
+## 📷 Screenshots / Demo
+
+> Tip: Drop screenshots or a GIF in `public/` and link them here.
+
+```md
+![Dogstudio Clone – Hero](./public/your-screenshot.png)
+```
+
+---
+
+## 🤝 Credits
+
+- Original design & inspiration: **Dogstudio®** (this is a **fan-made clone**, not affiliated).
+- Built with love using React, Three.js, GSAP, and Vite.
+
+---
+
+## 📄 License
+
+This project is for learning and portfolio purposes.  
+Check the original Dogstudio website before using this commercially.
