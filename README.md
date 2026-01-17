@@ -9,6 +9,16 @@ React, Vite, Three.js, React Three Fiber, GSAP, and custom matcap shaders.
 
 ---
 
+## 📷 Screenshots / Demo
+
+> Demo: Check out the live demo [here](https://mayurk224.github.io/dogStudio_clone/).
+
+```md
+![Dogstudio Clone – Hero](./public/preview.png)
+```
+
+---
+
 ## ✨ Features
 
 - 3D dog model rendered with Three.js + React Three Fiber
@@ -92,16 +102,6 @@ From `package.json`:
 - `npm run build` – Build for production
 - `npm run preview` – Preview production build
 - `npm run lint` – Run ESLint over the project
-
----
-
-## 📷 Screenshots / Demo
-
-> Tip: Drop screenshots or a GIF in `public/` and link them here.
-
-```md
-![Dogstudio Clone – Hero](./public/your-screenshot.png)
-```
 
 ---
 
