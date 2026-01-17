@@ -13,9 +13,7 @@ React, Vite, Three.js, React Three Fiber, GSAP, and custom matcap shaders.
 
 > Demo: Check out the live demo [here](https://mayurk224.github.io/dogStudio_clone/).
 
-```md
 ![Dogstudio Clone – Hero](./public/preview.png)
-```
 
 ---
 
